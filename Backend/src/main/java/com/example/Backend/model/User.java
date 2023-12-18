@@ -1,12 +1,13 @@
 package com.example.Backend.model;
 
-
 import lombok.Data;
+
 
 import javax.persistence.*;
 
-@Data
+
 @Entity
+@Data
 public class User {
 
     @Id
