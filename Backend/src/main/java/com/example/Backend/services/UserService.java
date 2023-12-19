@@ -1,13 +1,17 @@
 package com.example.Backend.services;
 
+import com.example.Backend.model.Permission;
 import com.example.Backend.model.User;
 import com.example.Backend.repositories.UserRepository;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,8 +30,8 @@ public class UserService implements IService<User, Long>, UserDetailsService {
     }
 
     @Override
-    public Optional<User> findById(Long var1) {
-        return Optional.empty();
+    public Optional<User> findById(Long userId) {
+        return this.userRepository.findById(userId);
     }
 
     @Override
@@ -36,8 +40,8 @@ public class UserService implements IService<User, Long>, UserDetailsService {
     }
 
     @Override
-    public void deleteById(Long var1) {
-
+    public void deleteById(Long userId) {
+        this.userRepository.deleteById(userId);
     }
 
 
@@ -48,6 +52,13 @@ public class UserService implements IService<User, Long>, UserDetailsService {
             throw new UsernameNotFoundException("Email: "+email+" not found");
         }
 
-        return new org.springframework.security.core.userdetails.User(myUser.getEmail(), myUser.getPassword(), new ArrayList<>());
+        Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+        if(myUser.getPermission().isCan_create_users()) grantedAuthorities.add(new SimpleGrantedAuthority("can_create_users"));
+        if(myUser.getPermission().isCan_read_users()) grantedAuthorities.add(new SimpleGrantedAuthority("can_read_users"));
+        if(myUser.getPermission().isCan_update_users()) grantedAuthorities.add(new SimpleGrantedAuthority("can_update_users"));
+        if(myUser.getPermission().isCan_delete_users()) grantedAuthorities.add(new SimpleGrantedAuthority("can_delete_users"));
+
+
+        return new org.springframework.security.core.userdetails.User(myUser.getEmail(), myUser.getPassword(), grantedAuthorities);
     }
 }
