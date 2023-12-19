@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
 @Service
 public class UserService implements IService<User, Long>, UserDetailsService {
 
@@ -33,7 +32,7 @@ public class UserService implements IService<User, Long>, UserDetailsService {
 
     @Override
     public List<User> findAll() {
-        return null;
+        return userRepository.findAll();
     }
 
     @Override

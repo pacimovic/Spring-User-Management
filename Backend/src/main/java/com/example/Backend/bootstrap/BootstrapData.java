@@ -1,5 +1,6 @@
 package com.example.Backend.bootstrap;
 
+import com.example.Backend.model.Permission;
 import com.example.Backend.model.User;
 import com.example.Backend.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,14 @@ public class BootstrapData implements CommandLineRunner {
         user.setSurname("Acimovic");
         user.setPassword(passwordEncoder.encode("1234"));
         user.setEmail("petar@gmail.com");
+
+        Permission permission = new Permission();
+        permission.setCan_create_users(true);
+        permission.setCan_read_users(true);
+        permission.setCan_update_users(true);
+        permission.setCan_delete_users(true);
+        user.setPermission(permission);
+
         userRepository.save(user);
     }
 }
