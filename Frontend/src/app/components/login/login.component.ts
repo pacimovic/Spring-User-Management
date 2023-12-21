@@ -14,14 +14,16 @@ export class LoginComponent {
     password: ''
   }
 
-
-
   constructor(private loginService: LoginService){}
 
   login(): void {
-    console.log('Email: ' + this.loginRequest.email + ' ,Password' + this.loginRequest.password)
+    console.log('Email: ' + this.loginRequest.email + ' ,Password: ' + this.loginRequest.password)
     this.loginService.login(this.loginRequest).subscribe(loginResponse => {
       console.log(loginResponse)
+
+      //cuvanje jwt-a u local storage
+      localStorage.setItem('jwt', loginResponse.jwt)
+
       alert('Login successful')
     })
 
