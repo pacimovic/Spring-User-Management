@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import {HttpClientModule} from "@angular/common/http";
 import { ShowUsersComponent } from './components/show-users/show-users.component';
 import { PermissionsPipe } from './pipes/permissions.pipe';
+import { CreateUserComponent } from './components/create-user/create-user.component';
 
 
 @NgModule({
@@ -15,8 +16,8 @@ import { PermissionsPipe } from './pipes/permissions.pipe';
     AppComponent,
     LoginComponent,
     ShowUsersComponent,
-    PermissionsPipe,
-
+    CreateUserComponent,
+    PermissionsPipe
   ],
   imports: [
     BrowserModule,

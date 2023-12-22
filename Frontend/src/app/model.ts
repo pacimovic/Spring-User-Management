@@ -26,3 +26,10 @@ export interface User {
         can_delete_users: boolean
     }
 }
+
+export interface Permission {
+    can_create_users: boolean,
+    can_read_users: boolean,
+    can_update_users: boolean,
+    can_delete_users: boolean
+}
