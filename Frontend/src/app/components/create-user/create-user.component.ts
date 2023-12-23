@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/model';
-import { CreateUserService } from 'src/app/services/create-user.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-create-user',
@@ -12,7 +12,7 @@ export class CreateUserComponent {
 
   router = inject(Router)
 
-  constructor(private createUserService: CreateUserService) {}
+  constructor(private userService: UserService) {}
 
 
   user: User = {
@@ -31,7 +31,7 @@ export class CreateUserComponent {
 
 
   createUser(): void {
-    this.createUserService.createUser(this.user).subscribe(user => {
+    this.userService.createUser(this.user).subscribe(user => {
       console.log(user)
       alert('User Created!')
       this.router.navigate(['showUsers'])

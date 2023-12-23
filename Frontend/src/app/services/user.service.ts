@@ -1,30 +1,42 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../model';
 import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
+import { User } from '../model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CreateUserService {
+export class UserService {
 
   private readonly apiUrl = environment.usersApi
 
+
   constructor(private httpClient: HttpClient) { }
 
+  getAllUsers(): Observable<User[]> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${localStorage.getItem('jwt')}`
+      })
+    }
+    return this.httpClient.get<User[]>(`${this.apiUrl}/all`, httpOptions)
+  }
+
   createUser(user: User): Observable<User> {
-    return this.httpClient.post<User>(this.apiUrl, user, this.httpOptions).
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${localStorage.getItem('jwt')}`
+      })
+    }
+    return this.httpClient.post<User>(this.apiUrl, user, httpOptions).
     pipe(catchError(this.handleError));
   }
   
 
-  private httpOptions = {
-    headers: new HttpHeaders({
-      Authorization: `Bearer ${localStorage.getItem('jwt')}`
-    })
-  }
+
   
+
   private handleError(error: HttpErrorResponse){
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.
