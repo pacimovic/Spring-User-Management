@@ -8,7 +8,7 @@ import { permissionGuard } from './guards/permission.guard';
 
 const routes: Routes = [
   {
-    path: "login",
+    path: 'login',
     component: LoginComponent
   },
   {

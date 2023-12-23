@@ -13,11 +13,11 @@ export const permissionGuard: CanActivateFn = (route, state) => {
 
   if(routePath === 'createUser' && permission.can_create_users == false){
     window.alert("You dont have permission for this page!")
-    return false
+    router.navigate(['login'])
   }
   else if(routePath === 'showUsers' && permission.can_read_users == false){
     window.alert("You dont have permission for this page!")
-    return false
+    router.navigate(['login'])
   }
 
 

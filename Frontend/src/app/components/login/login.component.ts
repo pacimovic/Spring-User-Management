@@ -31,8 +31,7 @@ export class LoginComponent {
       localStorage.setItem('permission', JSON.stringify(loginResponse.permission))
 
       //prikaz ili sakrivanje linka za kreiranje korisnika od zavisnosti od permisije
-      if(loginResponse.permission.can_create_users) this.appService.permission.can_create_users = true
-      else this.appService.permission.can_create_users = false
+      this.appService.permission = loginResponse.permission
 
       alert('Login successful')
     })
