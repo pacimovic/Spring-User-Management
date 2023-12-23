@@ -13,7 +13,10 @@
           <tr *ngFor="let user of users">
             <td>{{user.name}}</td>
             <td>{{user.surname}}</td>
-            <td>{{user.email}}</td>
+            <td>
+              <a *ngIf="appService.permission != null && appService.permission.can_update_users != false" [routerLink]="'/updateUser/'+user.userId">{{user.email}}</a>
+              <a *ngIf="appService.permission == null || appService.permission.can_update_users == false">{{user.email}}</a>
+            </td>
             <td>{{user | permissions}}</td>
           </tr>
         </tbody>

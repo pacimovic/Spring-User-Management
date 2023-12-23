@@ -19,6 +19,10 @@ export const permissionGuard: CanActivateFn = (route, state) => {
     window.alert("You dont have permission for this page!")
     router.navigate(['login'])
   }
+  else if(routePath === 'updateUser/:id' && permission.can_update_users == false){
+    window.alert("You dont have permission for this page!")
+    router.navigate(['login'])
+  }
 
 
   return true;

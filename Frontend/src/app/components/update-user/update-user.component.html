@@ -1,7 +1,7 @@
 <div class="container">
-    <h3>Create User</h3>
+    <h3>Update User</h3>
     <br>
-    <form (submit)="createUser()">
+    <form (submit)="updateUser()">
         <div class="form-group">
             <label for="exampleInputName"><b>Name</b></label>
             <input [(ngModel)]="user.name" name="name" type="text" class="form-control" id="exampleInputName" placeholder="Enter name">
@@ -39,6 +39,6 @@
             <input [(ngModel)]="user.permission.can_delete_users" name="delete" type="checkbox" class="form-check-input" id="delete">
             <label class="form-check-label" for="delete">Delete</label>
         </div><br>
-        <button [disabled]="user.name==='' || user.password==='' || user.surname==='' || user.email===''" type="submit" class="btn btn-primary">Submit</button>
+        <button [disabled]="user.name==='' || user.password==='' || user.surname==='' || user.email===''" type="submit" class="btn btn-primary">Update User</button>
     </form>
 </div>

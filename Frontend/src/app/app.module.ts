@@ -9,6 +9,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { ShowUsersComponent } from './components/show-users/show-users.component';
 import { PermissionsPipe } from './pipes/permissions.pipe';
 import { CreateUserComponent } from './components/create-user/create-user.component';
+import { UpdateUserComponent } from './components/update-user/update-user.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { CreateUserComponent } from './components/create-user/create-user.compon
     LoginComponent,
     ShowUsersComponent,
     CreateUserComponent,
-    PermissionsPipe
+    PermissionsPipe,
+    UpdateUserComponent
   ],
   imports: [
     BrowserModule,

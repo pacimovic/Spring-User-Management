@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/model';
+import { AppService } from 'src/app/services/app.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class ShowUsersComponent implements OnInit{
   
   router = inject(Router)
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, public appService: AppService) {}
 
     
 

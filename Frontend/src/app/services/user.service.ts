@@ -32,10 +32,31 @@ export class UserService {
     return this.httpClient.post<User>(this.apiUrl, user, httpOptions).
     pipe(catchError(this.handleError));
   }
+
+  updateUser(user: User): Observable<User> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${localStorage.getItem('jwt')}`
+      })
+    }
+    return this.httpClient.put<User>(this.apiUrl, user, httpOptions).
+    pipe(catchError(this.handleError));
+  }
+
   
+  findUser(id: number): Observable<User> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${localStorage.getItem('jwt')}`
+      })
+    }
+    return this.httpClient.get<User>(`${this.apiUrl}/${id}`, httpOptions).
+    pipe(catchError(this.handleError));
+  }
 
 
-  
+
+
 
   private handleError(error: HttpErrorResponse){
     if (error.status === 0) {
