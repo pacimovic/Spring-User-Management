@@ -66,4 +66,16 @@ public class UserController {
         return ResponseEntity.status(403).build();
     }
 
+
+    @GetMapping(value = "/{userId}")
+    public ResponseEntity<?> findUser(@PathVariable Long userId){
+        System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
+
+        if(SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains(new SimpleGrantedAuthority("can_read_users"))){
+            return ResponseEntity.ok(userService.findById(userId));
+        }
+
+        return ResponseEntity.status(403).build();
+    }
+
 }

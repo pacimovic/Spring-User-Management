@@ -1,6 +1,5 @@
 package com.example.Backend.configuration;
 
-
 import com.example.Backend.filters.JwtFilter;
 import com.example.Backend.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
