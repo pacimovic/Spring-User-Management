@@ -54,6 +54,16 @@ export class UserService {
     pipe(catchError(this.handleError));
   }
 
+  deleteUser(id: number):  Observable<User> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${localStorage.getItem('jwt')}`
+      })
+    }
+    return this.httpClient.delete<User>(`${this.apiUrl}/${id}`, httpOptions).
+    pipe(catchError(this.handleError))
+  }
+
 
 
 

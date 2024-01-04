@@ -18,12 +18,12 @@ export class ShowUsersComponent implements OnInit{
 
   constructor(private userService: UserService, public appService: AppService) {}
 
-    
-
+  
 
   ngOnInit(): void {
     this.userService.getAllUsers().subscribe({
-      next: (users) => this.users = users,
+      next: (users) => 
+        this.users = users,
       error: (error) => {
         if(error.status === 403) {
           alert('You dont have permission for this resource!')
@@ -31,7 +31,16 @@ export class ShowUsersComponent implements OnInit{
         }
       }
     })
-    
+  }
+
+  deleteUser(userId: number): void {
+    this.userService.deleteUser(userId).subscribe((user) => {
+      for(let i = 0; i < this.users.length; i++){
+        if(this.users.at(i)?.userId === userId){
+          this.users.splice(i, 1)
+        }
+      }
+    })
   }
   
 }
