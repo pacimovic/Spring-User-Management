@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoginRequest } from 'src/app/model';
+import { LoginRequest, Permission } from 'src/app/model';
 import { AppService } from 'src/app/services/app.service';
 import { LoginService } from 'src/app/services/login.service';
 
@@ -15,7 +15,7 @@ export class LoginComponent {
     password: ''
   }
 
-  constructor(private loginService: LoginService, private appService: AppService){}
+  constructor(private loginService: LoginService, private appService: AppService) { }
 
   login(): void {
     console.log('Email: ' + this.loginRequest.email + ' ,Password: ' + this.loginRequest.password)
@@ -34,6 +34,11 @@ export class LoginComponent {
       this.appService.permission = loginResponse.permission
 
       alert('Login successful')
+
+      var permission: Permission = loginResponse.permission
+      if (!(permission.can_create_users || permission.can_read_users || permission.can_update_users || permission.can_delete_users)) {
+        alert('User has no any permission!')
+      }
     })
 
     this.loginRequest.email = ''
